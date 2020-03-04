@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
             // Obteniendo el nombre del ISP
             this.isp = resp.isp;
 
-            // Destructurando el objecto recibido para obtener la localicación
+            // Destructurando el objecto recibido para obtener la localización
             const { city, lat, lng } = resp.location;
             this.mapaCoor = { lat, lng };
             this.ciudad = city;
