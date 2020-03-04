@@ -1,0 +1,145 @@
+<header class="uk-margin-large-bottom">
+  <nav class="uk-navbar-container uk-margin" uk-navbar>
+    <div class="uk-navbar-left uk-navbar-item uk-logo">
+      <span uk-icon="world" class="uk-margin-small-right"></span>
+      Conoce tu IP
+    </div>
+    <div class="uk-navbar-right"></div>
+    <ul class="uk-navbar-nav">
+      <li>
+        <a href="https://github.com/sebatstian-web/conocetuip" target="_blank">
+          <span uk-icon="icon: github; ratio: 2"></span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- En caso de error al obtener la IP -->
+<div *ngIf="error" class="uk-container uk-container-large uk-margin-large">
+  <div class="uk-alert-danger" uk-alert>
+    <h3>
+      <span
+        uk-icon="icon: warning; ratio: 2"
+        class="uk-margin-small-right"
+      ></span>
+      ¡Ops... Error!
+    </h3>
+    <p>
+      Parece que hubo un problema al obtener tu IP, vuelve a intentar recargando
+      el sitio por favor.
+    </p>
+  </div>
+</div>
+
+<main class="uk-container uk-container-large uk-text-center">
+  <!-- Sección IP -->
+  <section *ngIf="!error">
+    <h2 class="uk-margin-remove">Tu dirección IP es</h2>
+
+    <div *ngIf="loadingIp" class="uk-text-secondary" uk-spinner></div>
+
+    <div *ngIf="!loadingIp" class="uk-animation-fade">
+      <h1 class="uk-text-bold uk-margin-remove">{{ ip }}</h1>
+
+      <div class="uk-margin-top">
+        <p *ngIf="copiada" class="uk-margin-small-bottom uk-animation-fade">
+          <span uk-icon="check"></span>
+          ¡Listo! IP copiada al portapapeles.
+        </p>
+
+        <button
+          ngxClipboard
+          [cbContent]="ip"
+          (cbOnSuccess)="copiada = true"
+          class="uk-button uk-button-large"
+        >
+          Copiar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección más información -->
+  <section *ngIf="!error" class="uk-margin-large">
+    <hr />
+
+    <h2>Más información sobre la IP</h2>
+
+    <div *ngIf="loadingInfo">
+      <span class="uk-text-secondary" uk-spinner="ratio: 3"></span>
+    </div>
+
+    <div *ngIf="!loadingInfo" class="uk-animation-fade">
+      <h3>
+        ISP
+        <span class="uk-display-block uk-text-bold">{{ isp }}</span>
+      </h3>
+
+      <h3>
+        Ciudad
+        <span class="uk-display-block uk-text-bold">{{ ciudad }}</span>
+      </h3>
+
+      <h3>
+        <span class="uk-display-block">
+          Latitud <strong>{{ mapaCoor.lat }}</strong>
+        </span>
+        <span class="uk-display-block">
+          Longitud <strong>{{ mapaCoor.lng }}</strong>
+        </span>
+      </h3>
+
+      <h3 class="uk-margin-remove-bottom">
+        Zona de localización
+      </h3>
+      <div class="uk-height-medium">
+        <google-map height="100%" width="100%" [center]="mapaCoor">
+          <map-marker
+            #marcador
+            [position]="mapaCoor"
+            (mapClick)="marcadorInfo(marcador)"
+          ></map-marker>
+          <map-info-window>
+            <span class="uk-display-block">Lat: {{ mapaCoor.lat }}</span>
+            <span class="uk-display-block">Lng: {{ mapaCoor.lng }}</span>
+          </map-info-window>
+        </google-map>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de definiciones -->
+  <section class="uk-margin-large">
+    <hr />
+
+    <h2>¿Qué es?</h2>
+
+    <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+      <div *ngFor="let tarjeta of tarjetas">
+        <div class="uk-card uk-card-body uk-text-left">
+          <h3 class="uk-card-title">{{ tarjeta.titulo }}</h3>
+          <p>{{ tarjeta.descripcion }}</p>
+          <a [href]="tarjeta.url" target="_blank" class="uk-text-uppercase">
+            Saber más
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="uk-margin-large-top uk-text-center">
+  <div class="uk-container uk-padding-small uk-text-uppercase uk-text-small">
+    <span class="uk-display-block">
+      &copy; Conoce tu IP &#8226; {{ fecha }}
+    </span>
+    <span class="uk-display-block">
+      Sitio web desarrollado por
+      <a href="https://sebas.online/" target="_blank">sebas.online</a> 🚀
+    </span>
+    <span class="uk-display-block uk-margin-small-top">
+      Versión 1.0.0
+    </span>
+  </div>
+</footer>

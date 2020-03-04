@@ -1,0 +1,50 @@
+:root {
+  --color-principal: rgb(201, 227, 253);
+  --color-secundario: rgb(45, 142, 249);
+  --color-tercero: rgb(27, 31, 35);
+  --color-cuarto: rgb(255, 255, 255);
+}
+
+html {
+  background-color: var(--color-principal);
+}
+
+nav {
+  background-color: var(--color-tercero) !important;
+}
+
+nav a,
+.uk-logo,
+.uk-card h3 {
+  color: var(--color-secundario) !important;
+}
+
+button {
+  background-color: var(--color-tercero);
+  color: var(--color-cuarto) !important;
+}
+
+button:hover {
+  background-color: rgb(34, 34, 34);
+}
+
+hr {
+  border: 2px solid var(--color-tercero);
+}
+
+footer {
+  background-color: var(--color-secundario);
+  color: var(--color-cuarto) !important;
+}
+
+.uk-card {
+  background-color: var(--color-tercero);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+footer a,
+footer a:hover,
+.uk-card a,
+.uk-card a:hover {
+  color: var(--color-cuarto);
+}
