@@ -7,4 +7,4 @@ Como se utiliza una API gratuita, esta permite solo hasta 1000 consultas por mes
 Como framework CSS utilicé [UIkit](https://getuikit.com/).
 
 El sitio esta online en:
-[https://sebatstian-web.github.io/conocetuip/](https://sebatstian-web.github.io/conocetuip/)
+[https://sebatstian-web.github.io/ConoceTuIP/](https://sebatstian-web.github.io/ConoceTuIP/)
